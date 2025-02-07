@@ -1,0 +1,30 @@
+src/
+└── modules/
+    └── auth/
+        ├── domain/                  # Domain layer
+        │   ├── entities/           # Domain entities
+        │   ├── value-objects/      # Value objects
+        │   ├── repositories/       # Repository interfaces
+        │   └── services/          # Domain services
+        │
+        ├── infrastructure/          # Infrastructure layer
+        │   ├── persistence/        # Database related
+        │   │   ├── entities/      # TypeORM entities
+        │   │   ├── repositories/  # TypeORM repositories
+        │   │   └── migrations/    # Database migrations
+        │   ├── services/          # External services implementation
+        │   └── security/          # Security related implementations
+        │
+        ├── interfaces/              # Interface layer
+        │   ├── http/              # HTTP controllers
+        │   │   ├── controllers/
+        │   │   ├── middlewares/
+        │   │   ├── guards/
+        │   │   └── dtos/
+        │   └── graphql/           # GraphQL resolvers (if needed)
+        │
+        ├── services/               # Application Services
+        │   ├── auth.service.ts
+        │   └── social-auth.service.ts
+        │
+        └── auth.module.ts          # Module definition 
