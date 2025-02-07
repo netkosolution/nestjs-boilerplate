@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=staging
+    environment:
+      - NODE_ENV=staging
+    ports:
+      - "3000:3000" 
