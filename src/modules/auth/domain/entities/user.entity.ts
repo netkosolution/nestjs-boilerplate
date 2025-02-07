@@ -12,6 +12,7 @@ export class User extends AggregateRoot {
   private isActive: boolean;
   private lastLoginAt?: Date;
   private socialProviders: Map<string, string>;
+  private name: string;
 
   constructor(id: string, email: Email) {
     super();
@@ -55,5 +56,21 @@ export class User extends AggregateRoot {
 
   public updateLastLogin(): void {
     this.lastLoginAt = new Date();
+  }
+
+  public async validatePassword(password: string): Promise<boolean> {
+    return this.password.validate(password);
+  }
+
+  public getRoles(): string[] {
+    return this.roles.map(role => role.toString());
+  }
+
+  public setPassword(password: Password): void {
+    this.password = password;
+  }
+
+  public setName(name: string): void {
+    this.name = name;
   }
 } 

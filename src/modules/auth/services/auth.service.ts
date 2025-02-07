@@ -39,9 +39,9 @@ export class AuthService {
     const user = new User(
       crypto.randomUUID(),
       emailVO,
-      passwordVO,
-      name,
     );
+    user.setPassword(passwordVO);
+    user.setName(name);
     
     user.addRole(Role.USER);
     user.activate();

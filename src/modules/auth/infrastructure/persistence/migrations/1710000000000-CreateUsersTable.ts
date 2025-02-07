@@ -33,13 +33,13 @@ export class CreateUsersTable1710000000000 implements MigrationInterface {
           {
             name: 'roles',
             type: 'varchar',
-            array: true,
+            isArray: true,
             default: "'{user}'",
           },
           {
             name: 'permissions',
             type: 'varchar',
-            array: true,
+            isArray: true,
             default: "'{}'",
           },
           {
@@ -73,14 +73,9 @@ export class CreateUsersTable1710000000000 implements MigrationInterface {
     );
 
     // Create index for email
-    await queryRunner.createIndex(
-      'users',
-      {
-        name: 'IDX_USERS_EMAIL',
-        columnNames: ['email'],
-        isUnique: true,
-      },
-    );
+    await queryRunner.query(`
+      CREATE UNIQUE INDEX "IDX_USERS_EMAIL" ON "users" ("email");
+    `);
 
     // Enable uuid-ossp extension for UUID generation
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
