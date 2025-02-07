@@ -21,10 +21,10 @@ export class UserTypeormRepository implements IUserRepository {
   }
 
   async findByEmail(email: Email): Promise<User | null> {
-    const entity = await this.repository.findOne({
+    const userEntity = await this.repository.findOne({
       where: { email: email.getValue() },
     });
-    return entity ? this.mapper.toDomain(entity) : null;
+    return userEntity ? this.mapper.toDomain(userEntity) : null;
   }
 
   async save(user: User): Promise<void> {
@@ -32,15 +32,19 @@ export class UserTypeormRepository implements IUserRepository {
     await this.repository.save(entity);
   }
 
-  async findBySocialProvider(provider: string, providerId: string): Promise<User | null> {
-    const entity = await this.repository
-      .createQueryBuilder('user')
-      .where(`user.social_providers ->> :provider = :providerId`, {
-        provider,
-        providerId,
-      })
-      .getOne();
+  async create(email: Email, password: string, name: string): Promise<User> {
+    const entity = await this.repository.save({
+      email: email.getValue(),
+      password,
+      name,
+    });
+    return this.mapper.toDomain(entity);
+  }
 
-    return entity ? this.mapper.toDomain(entity) : null;
+  async findBySocialProvider(provider: string, providerId: string): Promise<User | null> {
+    const userEntity = await this.repository.findOne({
+      where: { socialProviders: { [provider]: providerId } },
+    });
+    return userEntity ? this.mapper.toDomain(userEntity) : null;
   }
 }

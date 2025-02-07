@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableIndex } from 'typeorm';
 
 export class CreateUsersTable1710000000000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -31,18 +31,6 @@ export class CreateUsersTable1710000000000 implements MigrationInterface {
             length: '255',
           },
           {
-            name: 'roles',
-            type: 'varchar',
-            isArray: true,
-            default: "'{user}'",
-          },
-          {
-            name: 'permissions',
-            type: 'varchar',
-            isArray: true,
-            default: "'{}'",
-          },
-          {
             name: 'is_active',
             type: 'boolean',
             default: false,
@@ -73,9 +61,18 @@ export class CreateUsersTable1710000000000 implements MigrationInterface {
     );
 
     // Create index for email
-    await queryRunner.query(`
-      CREATE UNIQUE INDEX "IDX_USERS_EMAIL" ON "users" ("email");
-    `);
+    await queryRunner.createIndex(
+      'users',
+      new TableIndex({
+        name: 'IDX_USERS_EMAIL',
+        columnNames: ['email'],
+        isUnique: true,
+        isSpatial: false,
+        isConcurrent: false,
+        isFulltext: false,
+        where: undefined,
+      }),
+    );
 
     // Enable uuid-ossp extension for UUID generation
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);

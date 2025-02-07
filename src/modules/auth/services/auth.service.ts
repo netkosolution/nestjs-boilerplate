@@ -36,14 +36,12 @@ export class AuthService {
     }
 
     const passwordVO = await Password.create(password);
-    const user = new User(crypto.randomUUID(), emailVO);
-    user.setPassword(passwordVO);
-    user.setName(name);
+    const user = await this.userRepository.create(emailVO, passwordVO.getValue(), name);
 
     user.addRole(Role.USER);
     user.activate();
-
     await this.userRepository.save(user);
+
     return this.generateToken(user);
   }
 

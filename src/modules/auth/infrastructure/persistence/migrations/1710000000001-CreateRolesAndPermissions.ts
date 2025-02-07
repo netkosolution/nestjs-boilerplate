@@ -80,6 +80,44 @@ export class CreateRolesAndPermissions1710000000001 implements MigrationInterfac
       true,
     );
 
+    // Create user_roles junction table
+    await queryRunner.createTable(
+      new Table({
+        name: 'user_roles',
+        columns: [
+          {
+            name: 'user_id',
+            type: 'uuid',
+          },
+          {
+            name: 'role_id',
+            type: 'uuid',
+          },
+        ],
+        foreignKeys: [
+          {
+            columnNames: ['user_id'],
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+          },
+          {
+            columnNames: ['role_id'],
+            referencedTableName: 'roles',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+          },
+        ],
+        indices: [
+          {
+            columnNames: ['user_id', 'role_id'],
+            isUnique: true,
+          },
+        ],
+      }),
+      true,
+    );
+
     // Create role_permissions junction table
     await queryRunner.createTable(
       new Table({
@@ -121,6 +159,7 @@ export class CreateRolesAndPermissions1710000000001 implements MigrationInterfac
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('role_permissions');
+    await queryRunner.dropTable('user_roles');
     await queryRunner.dropTable('permissions');
     await queryRunner.dropTable('roles');
   }
