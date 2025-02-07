@@ -124,4 +124,4 @@ export class CreateRolesAndPermissions1710000000001 implements MigrationInterfac
     await queryRunner.dropTable('permissions');
     await queryRunner.dropTable('roles');
   }
-} 
+}

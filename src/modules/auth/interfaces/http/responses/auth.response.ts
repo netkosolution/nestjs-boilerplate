@@ -26,4 +26,4 @@ export class ErrorResponse {
     description: 'Error type',
   })
   error: string;
-} 
+}

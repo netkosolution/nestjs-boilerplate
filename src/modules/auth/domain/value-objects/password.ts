@@ -19,4 +19,4 @@ export class Password {
   public getValue(): string {
     return this.value;
   }
-} 
+}

@@ -6,10 +6,7 @@ import { Email } from '../../../domain/value-objects/email';
 @Injectable()
 export class UserMapper {
   toDomain(entity: UserTypeormEntity): User {
-    const user = new User(
-      entity.id,
-      new Email(entity.email),
-    );
+    const user = new User(entity.id, new Email(entity.email));
     // Map other properties
     return user;
   }
@@ -21,4 +18,4 @@ export class UserMapper {
     // Map other properties
     return entity;
   }
-} 
+}

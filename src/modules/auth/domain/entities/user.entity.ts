@@ -73,4 +73,4 @@ export class User extends AggregateRoot {
   public setName(name: string): void {
     this.name = name;
   }
-} 
+}

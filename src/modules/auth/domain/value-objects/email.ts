@@ -20,4 +20,4 @@ export class Email {
   public equals(other: Email): boolean {
     return this.value === other.value;
   }
-} 
+}

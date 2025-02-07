@@ -32,10 +32,7 @@ export class UserTypeormRepository implements IUserRepository {
     await this.repository.save(entity);
   }
 
-  async findBySocialProvider(
-    provider: string,
-    providerId: string,
-  ): Promise<User | null> {
+  async findBySocialProvider(provider: string, providerId: string): Promise<User | null> {
     const entity = await this.repository
       .createQueryBuilder('user')
       .where(`user.social_providers ->> :provider = :providerId`, {
@@ -46,4 +43,4 @@ export class UserTypeormRepository implements IUserRepository {
 
     return entity ? this.mapper.toDomain(entity) : null;
   }
-} 
+}

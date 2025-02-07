@@ -85,4 +85,4 @@ export class CreateUsersTable1710000000000 implements MigrationInterface {
     await queryRunner.dropIndex('users', 'IDX_USERS_EMAIL');
     await queryRunner.dropTable('users');
   }
-} 
+}

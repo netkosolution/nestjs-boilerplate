@@ -1,0 +1,9 @@
+dist
+node_modules
+coverage
+.git
+.husky
+.vscode
+README.md
+.env*
+*.log 

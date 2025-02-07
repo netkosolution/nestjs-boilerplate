@@ -19,7 +19,7 @@ export class AdminUserSeeder {
 
     if (!existingAdmin) {
       const hashedPassword = await bcrypt.hash('Admin123!@#', 10);
-      
+
       await this.userRepository.save({
         email: adminEmail,
         password: hashedPassword,
@@ -39,4 +39,4 @@ export class AdminUserSeeder {
       });
     }
   }
-} 
+}

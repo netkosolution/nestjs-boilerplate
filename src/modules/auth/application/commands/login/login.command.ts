@@ -3,4 +3,4 @@ export class LoginCommand {
     public readonly email: string,
     public readonly password: string,
   ) {}
-} 
+}

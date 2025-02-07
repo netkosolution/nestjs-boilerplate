@@ -63,11 +63,7 @@ export class AuthController {
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   async register(@Body() registerDto: RegisterDto) {
-    return this.authService.register(
-      registerDto.email,
-      registerDto.password,
-      registerDto.name,
-    );
+    return this.authService.register(registerDto.email, registerDto.password, registerDto.name);
   }
 
   @Post('social/google')
@@ -100,4 +96,4 @@ export class AuthController {
   async protectedRoute() {
     return { message: 'This is a protected route' };
   }
-} 
+}

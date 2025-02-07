@@ -35,4 +35,4 @@ import { GoogleAuthService } from './infrastructure/services/google-auth.service
   ],
   exports: ['IUserRepository', AuthService],
 })
-export class AuthModule {} 
+export class AuthModule {}

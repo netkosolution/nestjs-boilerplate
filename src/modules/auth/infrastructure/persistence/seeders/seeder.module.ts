@@ -8,10 +8,8 @@ import { PermissionSeeder } from './permission.seeder';
 import { AdminUserSeeder } from './admin-user.seeder';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([UserTypeormEntity, Role, Permission]),
-  ],
+  imports: [TypeOrmModule.forFeature([UserTypeormEntity, Role, Permission])],
   providers: [RoleSeeder, PermissionSeeder, AdminUserSeeder],
   exports: [RoleSeeder, PermissionSeeder, AdminUserSeeder],
 })
-export class SeederModule {} 
+export class SeederModule {}

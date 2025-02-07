@@ -12,4 +12,4 @@ export class JwtService {
   verifyToken(token: string): any {
     return this.jwtService.verify(token);
   }
-} 
+}

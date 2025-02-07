@@ -31,4 +31,4 @@ export class GoogleAuthService {
       throw new Error('Invalid Google token');
     }
   }
-} 
+}

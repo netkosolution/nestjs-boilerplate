@@ -31,4 +31,4 @@ export class LoginHandler implements ICommandHandler<LoginCommand> {
       roles: user.getRoles(),
     });
   }
-} 
+}

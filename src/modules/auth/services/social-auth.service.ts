@@ -16,9 +16,9 @@ export class SocialAuthService {
 
   async authenticateGoogle(token: string): Promise<string> {
     const googleUser = await this.googleAuthService.verifyToken(token);
-    
+
     let user = await this.userRepository.findBySocialProvider('google', googleUser.id);
-    
+
     if (!user) {
       user = await this.createUserFromGoogle(googleUser);
     }
@@ -31,10 +31,7 @@ export class SocialAuthService {
 
   private async createUserFromGoogle(googleUser: any): Promise<User> {
     const emailVO = new Email(googleUser.email);
-    const user = new User(
-      crypto.randomUUID(),
-      emailVO,
-    );
+    const user = new User(crypto.randomUUID(), emailVO);
 
     user.addRole(Role.USER);
     user.activate();
@@ -51,4 +48,4 @@ export class SocialAuthService {
       roles: user.getRoles(),
     });
   }
-} 
+}

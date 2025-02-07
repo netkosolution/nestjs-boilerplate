@@ -36,16 +36,13 @@ export class AuthService {
     }
 
     const passwordVO = await Password.create(password);
-    const user = new User(
-      crypto.randomUUID(),
-      emailVO,
-    );
+    const user = new User(crypto.randomUUID(), emailVO);
     user.setPassword(passwordVO);
     user.setName(name);
-    
+
     user.addRole(Role.USER);
     user.activate();
-    
+
     await this.userRepository.save(user);
     return this.generateToken(user);
   }
@@ -57,4 +54,4 @@ export class AuthService {
       roles: user.getRoles(),
     });
   }
-} 
+}

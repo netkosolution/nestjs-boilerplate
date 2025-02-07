@@ -16,9 +16,9 @@ export class SocialLoginDto {
     enum: ['google', 'facebook', 'apple', 'twitter'],
   })
   @IsString({ message: 'Provider must be a string' })
-  @IsIn(['google', 'facebook', 'apple', 'twitter'], { 
-    message: 'Provider must be one of: google, facebook, apple, twitter' 
+  @IsIn(['google', 'facebook', 'apple', 'twitter'], {
+    message: 'Provider must be one of: google, facebook, apple, twitter',
   })
   @IsNotEmpty({ message: 'Provider is required' })
   provider: string;
-} 
+}
